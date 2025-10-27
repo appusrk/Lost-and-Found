@@ -1,0 +1,55 @@
+.header-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease; /* smooth transition */
+  padding: 0.8rem 2rem; /* default padding */
+}
+
+.header-box.shrink {
+  padding: 0.4rem 2rem;   /* smaller padding on scroll */
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: font-size 0.3s ease;
+}
+
+.header-box.shrink heading {
+  font-size: 1rem;  /* reduce logo size on scroll */
+}
+.brand-name {
+  font-size: 1.6rem;      /* big & visible */
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;            
+}
+
+.tagline {
+  font-size: 0.75rem;
+  color: #ffd700;         
+  margin-top: 2px;
+}
+
+.heading {
+  font-size: 1.2rem; 
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+}
+.logo-icon {
+  width: 40px;          /* image width */
+  height: 40px;         /* image height */
+  object-fit: contain;  /* prevent stretching */
+  margin-right: 6px;    /* space to brand name */
+}
+
