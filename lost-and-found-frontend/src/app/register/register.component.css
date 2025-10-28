@@ -8,6 +8,31 @@ form{
   display: flex;
   flex-direction: column;
 }
+.register-btn {
+  background-color: #007bff; /* normal blue */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* when hovered and enabled */
+.register-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.03);
+}
+
+/* when disabled */
+.register-btn:disabled {
+  background-color: #ccc;   /* soft grey */
+  color: #666;              /* dim text */
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.8;
+}
 
 .form-group {
   margin-bottom: 15px;

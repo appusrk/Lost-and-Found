@@ -1,44 +1,103 @@
 <div class="container">
   <app-header></app-header>
-<div class="form-box">
-  <h2>Create an Account</h2>
 
-  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+  <div class="form-box">
+    <h2>Create an Account</h2>
 
-    <div class="form-group">
-      <input type="text" placeholder="First Name*" name="firstName" [(ngModel)]="firstName" required />
-      
-    </div>
-    
-    <div class="form-group">
-      <input type="text" placeholder="USN*" name="studentNumber" [(ngModel)]="studentNumber" required />
-    </div>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
 
-    <div class="form-group">
-      <input type="text" placeholder="Department*" name="Department" [(ngModel)]="Department" required />
-    </div>
+      <!-- Name -->
+      <div class="form-group">
+        <input type="text" placeholder="Name*" name="name"
+               [(ngModel)]="name" required minlength="2" maxlength="50" #nameRef="ngModel" />
+        <div *ngIf="nameRef.invalid && nameRef.touched" class="text-danger">
+          <small *ngIf="nameRef.errors?.['required']">Name is required</small>
+          <small *ngIf="nameRef.errors?.['minlength']">Name must be at least 2 characters long</small>
+        </div>
+      </div>
 
-    <div class="form-group">
-      <select name="userLevel" [(ngModel)]="userLevel" required>
-        <option value="">Choose User Level*</option>
-        <option>Student</option>
-        <option>Faculty</option>
-        <option>Admin</option>
-      </select>
-    </div>
+      <!-- USN -->
+      <div class="form-group">
+        <input type="text" placeholder="USN*" name="usn"
+               [(ngModel)]="usn" required pattern="^[0-9A-Z]{10}$" #usnRef="ngModel" />
+        <div *ngIf="usnRef.invalid && usnRef.touched" class="text-danger">
+          <small *ngIf="usnRef.errors?.['required']">USN is required 💕</small>
+          <small *ngIf="usnRef.errors?.['pattern']">Invalid USN format (e.g. 1RN21CS001)</small>
+        </div>
+      </div>
 
-    <div class="form-group">
-      <input type="email" placeholder="Email*" name="email" [(ngModel)]="email" required />
-    </div>
+      <!-- Department -->
+      <div class="form-group">
+        <input type="text" placeholder="Department*" name="department"
+               [(ngModel)]="department" required #departmentRef="ngModel" />
+        <div *ngIf="departmentRef.invalid && departmentRef.touched" class="text-danger">
+          <small>Please enter your department 🌼</small>
+        </div>
+      </div>
 
-    <div class="form-group">
-      <input type="password" placeholder="Password*" name="password" [(ngModel)]="password" required />
+      <!-- User Level -->
+      <div class="form-group">
+        <select name="userLevel" [(ngModel)]="userLevel" required #userLevelRef="ngModel">
+          <option value="">Choose User Level*</option>
+          <option value="student">Student</option>
+          <option value="faculty">Faculty</option>
+          <option value="admin">Admin</option>
+        </select>
+        <div *ngIf="userLevelRef.invalid && userLevelRef.touched" class="text-danger">
+          <small>Please select a user level 💫</small>
+        </div>
+      </div>
 
-      <input type="password" placeholder="Confirm Password*" name="confirmPassword" [(ngModel)]="confirmPassword" required />
-    </div>
+      <!-- Email -->
+      <div class="form-group">
+        <input type="email" placeholder="Email*" name="email"
+               [(ngModel)]="email" required email #emailRef="ngModel" />
+        <div *ngIf="emailRef.invalid && emailRef.touched" class="text-danger">
+          <small *ngIf="emailRef.errors?.['required']">Email is required 💌</small>
+          <small *ngIf="emailRef.errors?.['email']">Please enter a valid email</small>
+        </div>
+      </div>
 
-    <button type="submit" class="register-btn">SIGN-UP</button>
-  </form>
+      <!-- Passwords -->
+      <div class="form-group">
+  <input
+    type="password"
+    placeholder="Password*"
+    name="password"
+    [(ngModel)]="password"
+    required
+    minlength="8"
+    #passwordRef="ngModel"
+  />
+
+  <input
+    type="password"
+    placeholder="Confirm Password*"
+    name="confirmPassword"
+    [(ngModel)]="confirmPassword"
+    required
+    #confirmPasswordRef="ngModel"
+  />
+
+  <!-- Password error messages -->
+  <div *ngIf="passwordRef.invalid && passwordRef.touched" class="text-danger">
+    <small *ngIf="passwordRef.errors?.['required']">Password is required 🔒</small>
+    <small *ngIf="passwordRef.errors?.['minlength']">Minimum 8 characters</small>
+  </div>
+
+  <!-- Confirm password mismatch -->
+  <div *ngIf="confirmPasswordRef.touched && password !== confirmPassword" class="text-danger">
+    <small>Passwords do not match ❌</small>
+  </div>
 </div>
+
+      <!-- Submit -->
+      <button type="submit" class="register-btn"
+        [disabled]="registerForm.invalid || password !== confirmPassword">
+        SIGN-UP
+      </button>
+    </form>
+  </div>
+
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>

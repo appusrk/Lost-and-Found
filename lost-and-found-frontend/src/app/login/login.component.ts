@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from '../shared/header/header.component';
-import { FooterComponent } from '../shared/footer/footer.component';
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-login.component',
-  imports: [FormsModule, CommonModule, HeaderComponent, FooterComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  studentnumber='';
+  constructor(private router: Router) {}
+  usn='';
   password='';
 onSubmit(form: any) {
     console.log('Form submitted:', form.value);
     alert('🎉 User logged in successfully!');
+    this.router.navigate(['/dashboard']);
   }
 }
