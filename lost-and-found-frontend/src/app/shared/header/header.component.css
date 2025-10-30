@@ -52,4 +52,11 @@
   object-fit: contain;  /* prevent stretching */
   margin-right: 6px;    /* space to brand name */
 }
+.home-icon {
+  width: 30px;          /* image width */
+  height: 40px;         /* image height */
+  object-fit: contain;  /* prevent stretching */
+ cursor: pointer;
+  transition: transform 0.2s ease-in-out;  
+}
 

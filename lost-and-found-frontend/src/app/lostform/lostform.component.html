@@ -1,0 +1,80 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+  <div class="content-area">
+  <div class="form-box">
+    <h2>Lost item report</h2>
+
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
+
+      <!-- Name -->
+      <div class="form-group">
+        <input type="text" placeholder="Item Name*" name="name"
+               [(ngModel)]="itemname" required minlength="2" maxlength="50" #nameRef="ngModel" />
+        <div *ngIf="nameRef.invalid && nameRef.touched" class="text-danger">
+          <small *ngIf="nameRef.errors?.['required']">Name is required</small>
+        </div>
+      </div>
+
+      <!--Description -->
+      <div class="form-group">
+        <input type="text" placeholder="Description*" name="description"
+               [(ngModel)]="description" required #desRef="ngModel" />
+      </div>
+
+      <!--Location -->
+      <div class="form-group">
+        <input type="text" placeholder="Location*" name="location"
+               [(ngModel)]="location" required #departmentRef="ngModel" />
+        <div *ngIf="departmentRef.invalid && departmentRef.touched" class="text-danger">
+          <small>Please specify the location</small>
+        </div>
+      </div>
+
+
+    <div class="form-group phone-group">
+  <div class="phone-wrapper">
+    
+    <input
+      type="text"
+      placeholder="+91XXXXXXXXXX"
+      name="contact"
+      [(ngModel)]="contact"
+      required
+      pattern="^\+91[6-9][0-9]{9}$"
+      maxlength="13"
+      #contactRef="ngModel"
+      (keypress)="allowOnlyPlusAndNumbers($event)"
+    />
+  </div>
+
+  <div *ngIf="contactRef.invalid && contactRef.touched" class="text-danger">
+    <small *ngIf="contactRef.errors?.['required']">Contact number is required</small>
+    <small *ngIf="contactRef.errors?.['pattern']">Please enter in valid format(+91XXXXXXXXXX)</small>
+  </div>
+</div>
+
+
+      <!-- Image Upload -->
+<div class="form-group">
+  <label for="image">Upload Item Image (Optional)</label>
+  <input type="file" id="image" name="image"
+         (change)="onFileSelected($event)" accept="image/*" />
+
+  <!-- Image Preview -->
+  <div *ngIf="imagePreview" class="preview-box">
+    <img [src]="imagePreview" alt="Preview" class="preview-img" />
+  </div>
+</div>
+
+
+      
+      <!-- Submit -->
+      <button type="submit" class="register-btn"
+        [disabled]="registerForm.invalid">
+        SUBMIT
+      </button>
+    </form>
+  </div>
+</div>
+  
+</div>

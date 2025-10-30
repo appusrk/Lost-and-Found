@@ -1,0 +1,37 @@
+.sidebar {
+  flex: 1;
+  max-width: 250px;
+ margin-left: 40px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-color: black;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 5px;
+  gap: 5rem;
+  padding-bottom: 5px;
+}
+
+.sidebar li {
+  margin: 1rem 0;
+  padding-bottom: 15px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #dcfa46;
+  font-weight: 500;
+  transition: 0.3s;
+  padding-bottom: 5px;
+  gap: 5rem;
+}
+
+.sidebar a:hover {
+  color: #f6ae3c;
+}
+.dashboard-main{
+  border-color: black;
+}
