@@ -52,6 +52,12 @@ public class FoundItemController {
 
         return saved;
     }
+ // Get found items for a specific user (by USN)
+    @GetMapping("/user/{usn}")
+    public List<Found_items> getFoundItemsByUser(@PathVariable String usn) {
+        return foundItemRepository.findByUser_Usn(usn);
+    }
+
 
     // Delete found item
     @DeleteMapping("/{id}")

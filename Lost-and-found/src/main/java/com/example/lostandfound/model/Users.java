@@ -1,0 +1,93 @@
+package com.example.lostandfound.model;
+
+	import jakarta.persistence.*;
+	import java.time.LocalDate;
+	import java.time.LocalDateTime;
+
+	@Entity
+	@Table(name = "users")
+	public class Users {
+
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private int id;
+
+	    @Column(name = "name", nullable = false)
+	    private String name;
+
+	    @Column(name = "USN", nullable = false, unique = true)
+	    private String usn;
+
+	    @Column(name = "department")
+	    private String department;
+
+	    @Column(name = "User_Level")
+	    private String userLevel;
+
+	    @Column(name = "Email", nullable = false, unique = true)
+	    private String email;
+
+	    @Column(name = "Password", nullable = false)
+	    private String password;
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getUsn() {
+			return usn;
+		}
+
+		public void setUsn(String usn) {
+			this.usn = usn;
+		}
+
+		public String getDepartment() {
+			return department;
+		}
+
+		public void setDepartment(String department) {
+			this.department = department;
+		}
+
+		public String getUserLevel() {
+			return userLevel;
+		}
+
+		public void setUserLevel(String userLevel) {
+			this.userLevel = userLevel;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+	  
+	}
+
+
+

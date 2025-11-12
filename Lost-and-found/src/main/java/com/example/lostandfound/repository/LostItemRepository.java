@@ -1,8 +1,11 @@
 package com.example.lostandfound.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.lostandfound.model.Lost_items;
 
 public interface LostItemRepository extends JpaRepository<Lost_items, Integer>{
+	List<Lost_items> findByUser_Usn(String usn);
+
 }

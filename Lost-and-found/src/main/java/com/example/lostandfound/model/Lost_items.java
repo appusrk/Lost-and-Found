@@ -31,6 +31,19 @@
 	    
 	    @Column(name = "image_embedding", columnDefinition = "JSON")
 	    private String imageEmbedding;  
+	    
+	    @ManyToOne
+	    @JoinColumn(name = "USN", referencedColumnName = "USN", nullable = false)
+	    private Users user;
+
+
+		public Users getUser() {
+			return user;
+		}
+
+		public void setUser(Users user) {
+			this.user = user;
+		}
 
 		public String getImageEmbedding() {
 			return imageEmbedding;

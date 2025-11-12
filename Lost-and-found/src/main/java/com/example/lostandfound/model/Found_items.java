@@ -20,7 +20,6 @@ public class Found_items {
 
     private String location;
 
-
     @Column(name = "image_url")
     private String imageUrl;
 
@@ -33,7 +32,19 @@ public class Found_items {
     @Column(name = "image_hash")
     private String imageHash;    
 
-    
+    @ManyToOne
+    @JoinColumn(name = "USN", referencedColumnName = "USN", nullable = false)
+    private Users user;
+
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
 	public String getImageEmbedding() {
 		return imageEmbedding;
 	}

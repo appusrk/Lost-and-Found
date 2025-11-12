@@ -26,6 +26,10 @@ public class Match_history {
 
     @Column(name = "found_contact")
     private String foundContact;
+    
+    @ManyToOne
+    @JoinColumn(name = "USN", referencedColumnName = "USN", nullable = false)
+    private Users user;
 
     // Getters and setters
 
@@ -68,5 +72,14 @@ public class Match_history {
     public void setFoundContact(String foundContact) {
         this.foundContact = foundContact;
     }
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+    
 
 }

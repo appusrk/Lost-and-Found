@@ -54,6 +54,11 @@ public class LostItemController {
         return save;
 
     }
+ // Get found items for a specific user (by USN)
+    @GetMapping("/user/{usn}")
+    public List<Lost_items> getLostItemsByUser(@PathVariable String usn) {
+        return lostItemRepository.findByUser_Usn(usn);
+    }
 
     // Delete lost item
     @DeleteMapping("/{id}")
