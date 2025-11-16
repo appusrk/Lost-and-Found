@@ -24,6 +24,22 @@ export class RegisterComponent {
   email = '';
   password = '';
   confirmPassword = '';
+showUSN = false;
+showEmployeeId = false;
+
+onRoleChange() {
+  if (this.userLevel === 'student') {
+    this.showUSN = true;
+    this.showEmployeeId = false;
+  } else if (this.userLevel === 'faculty') {
+    this.showUSN = false;
+    this.showEmployeeId = true;
+  } else {
+    this.showUSN = false;
+    this.showEmployeeId = false;
+  }
+}
+
 
   onSubmit(form: any) {
     if (form.invalid) {

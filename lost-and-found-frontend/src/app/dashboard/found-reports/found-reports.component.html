@@ -1,0 +1,24 @@
+<h2>Your Found Reports</h2>
+
+<div *ngIf="foundItems.length === 0">
+  <p>You have not reported any found items yet.</p>
+</div>
+
+<table *ngIf="foundItems.length > 0" class="report-table">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of foundItems">
+      <td>{{ item.itemName }}</td>
+      <td>{{ item.description }}</td>
+      <td>{{ item.location }}</td>
+      <td>{{ item.dateFound | date:'mediumDate' }}</td>
+    </tr>
+  </tbody>
+</table>

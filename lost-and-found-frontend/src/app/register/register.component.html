@@ -16,35 +16,44 @@
         </div>
       </div>
 
-      <!-- USN -->
-      <div class="form-group">
-        <input type="text" placeholder="USN*" name="usn"
-               [(ngModel)]="usn" required pattern="^[0-9A-Z]{10}$" #usnRef="ngModel" />
-        <div *ngIf="usnRef.invalid && usnRef.touched" class="text-danger">
-          <small *ngIf="usnRef.errors?.['required']">USN is required </small>
-          <small *ngIf="usnRef.errors?.['pattern']">Invalid USN format (e.g. 1RN21CS001)</small>
-        </div>
-      </div>
+       <!-- User Level -->
+<div class="form-group">
+  <select name="userLevel" [(ngModel)]="userLevel" required #userLevelRef="ngModel" (change)="onRoleChange()">
+    <option value="">Choose User Level*</option>
+    <option value="student">Student</option>
+    <option value="faculty">Faculty</option>
+  </select>
+  <div *ngIf="userLevelRef.invalid && userLevelRef.touched" class="text-danger">
+    <small>Please select a user level </small>
+  </div>
+</div>
+
+<!-- USN (for Student only) -->
+<div class="form-group" *ngIf="showUSN">
+  <input type="text" placeholder="USN*" name="usn"
+         [(ngModel)]="usn" required pattern="^[0-9A-Z]{10}$" #usnRef="ngModel" />
+  <div *ngIf="usnRef.invalid && usnRef.touched" class="text-danger">
+    <small *ngIf="usnRef.errors?.['required']">USN is required </small>
+    <small *ngIf="usnRef.errors?.['pattern']">Invalid USN format (e.g. 1RN21CS001)</small>
+  </div>
+</div>
+
+<!-- Employee ID (for Faculty only) -->
+<div class="form-group" *ngIf="showEmployeeId">
+  <input type="text" placeholder="Employee ID*" name="employeeId"
+         [(ngModel)]="usn" required #empIdRef="ngModel" />
+  <div *ngIf="empIdRef.invalid && empIdRef.touched" class="text-danger">
+    <small>Employee ID is required</small>
+  </div>
+</div>
+
 
       <!-- Department -->
       <div class="form-group">
         <input type="text" placeholder="Department*" name="department"
                [(ngModel)]="department" required #departmentRef="ngModel" />
         <div *ngIf="departmentRef.invalid && departmentRef.touched" class="text-danger">
-          <small>Please enter your department 🌼</small>
-        </div>
-      </div>
-
-      <!-- User Level -->
-      <div class="form-group">
-        <select name="userLevel" [(ngModel)]="userLevel" required #userLevelRef="ngModel">
-          <option value="">Choose User Level*</option>
-          <option value="student">Student</option>
-          <option value="faculty">Faculty</option>
-          <option value="admin">Admin</option>
-        </select>
-        <div *ngIf="userLevelRef.invalid && userLevelRef.touched" class="text-danger">
-          <small>Please select a user level 💫</small>
+          <small>Please enter your department </small>
         </div>
       </div>
 

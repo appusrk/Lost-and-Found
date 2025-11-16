@@ -7,6 +7,7 @@ import com.example.lostandfound.dto.LoginRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -19,6 +20,8 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
@@ -34,7 +37,7 @@ public class AuthController {
         Users user = new Users();
         user.setName(registerRequest.getName());
         user.setUsn(registerRequest.getUsn());
-        user.setPassword(registerRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setEmail(registerRequest.getEmail());
         user.setDepartment(registerRequest.getDepartment());
         user.setUserLevel(registerRequest.getUserLevel());
@@ -57,12 +60,10 @@ public class AuthController {
             ));
         }
 
-        if (!dbUser.getPassword().equals(loginRequest.getPassword())) {
-            return ResponseEntity.badRequest().body(Map.of(
-                    "status", "error",
-                    "message", "Incorrect password"
-            ));
+        if (!passwordEncoder.matches(loginRequest.getPassword(), dbUser.getPassword())) {
+            return ResponseEntity.badRequest().body("Incorrect password");
         }
+        
 
         return ResponseEntity.ok(Map.of(
                 "status", "success",

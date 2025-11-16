@@ -1,11 +1,24 @@
  <div class="dashboard-main">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <ul>
-        <li><a href="#">User Details</a></li>
-        <li><a href="#">Lost Reports</a></li>
-        <li><a href="#">Found Reports</a></li>
-        <li><a href="#">Issues Reports</a></li>
-        <li><a href="#">Match History</a></li>
-      </ul>
-    </aside>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <ul>
+      <li><a routerLink="user-details">User Details</a></li>
+      <li><a routerLink="lost-reports">Lost Reports</a></li>
+      <li><a routerLink="found-reports">Found Reports</a></li>
+      <li><a routerLink="issues">Issues Reports</a></li>
+      <li><a routerLink="match-history">Match History</a></li>
+      <button class="logout-btn" (click)="logout()">
+  <img src="assets/logout.png" alt="logout icon">
+  <span>Logout</span>
+</button>
+
+    </ul>
+  </aside>
+  <br><br>
+  
+
+
+
+
+</div>

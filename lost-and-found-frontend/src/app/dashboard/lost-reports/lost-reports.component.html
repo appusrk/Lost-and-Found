@@ -1,0 +1,24 @@
+<h2>Your Lost Reports</h2>
+
+<div *ngIf="lostItems.length === 0">
+  <p>You have not reported any lost items yet.</p>
+</div>
+
+<table *ngIf="lostItems.length > 0" class="report-table">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of lostItems">
+      <td>{{ item.itemName }}</td>
+      <td>{{ item.description }}</td>
+      <td>{{ item.location }}</td>
+      <td>{{ item.dateLost | date:'mediumDate' }}</td>
+    </tr>
+  </tbody>
+</table>

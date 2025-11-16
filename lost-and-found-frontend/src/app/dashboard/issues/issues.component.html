@@ -1,0 +1,34 @@
+<div class="container">
+
+  
+  <hr>
+
+  <h2 class="title">All Issues</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>File</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let issue of issues">
+        <td>{{ issue.id }}</td>
+        <td>{{ issue.title }}</td>
+        <td>{{ issue.description }}</td>
+        <td>
+          <a *ngIf="issue.fileUrl" [href]="issue.fileUrl" target="_blank">Download</a>
+        </td>
+        <td>
+          <button (click)="deleteIssue(issue.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

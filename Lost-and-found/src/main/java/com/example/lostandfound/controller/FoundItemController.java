@@ -30,11 +30,6 @@ public class FoundItemController {
         return foundItemRepository.findAll();
     }
 
-    // Get found item by ID
-    @GetMapping("/{id}")
-    public Optional<Found_items> getFoundItemById(@PathVariable int id) {
-        return foundItemRepository.findById(id);
-    }
 
     // Add a found item
     @PostMapping

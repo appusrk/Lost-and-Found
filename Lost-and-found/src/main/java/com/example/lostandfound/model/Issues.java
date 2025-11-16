@@ -1,6 +1,7 @@
 package com.example.lostandfound.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -32,9 +33,11 @@ public class Issues {
     @Column(name = "reported_on")
     private LocalDateTime reportedOn =LocalDateTime.now(); 
     
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "USN", referencedColumnName = "USN", nullable = false)
     private Users user;
+
 
 	public int getId() {
 		return id;

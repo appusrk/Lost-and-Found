@@ -20,7 +20,7 @@
   padding-bottom: 15px;
 }
 
-.sidebar a {
+ .sidebar a {
   text-decoration: none;
   color: #dcfa46;
   font-weight: 500;
@@ -34,4 +34,22 @@
 }
 .dashboard-main{
   border-color: black;
+}
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  color: white;
+  font-size: 18px;
+}
+
+.logout-btn img {
+  width: 28px;     /* reduce size */
+  height: 28px;    /* match width */
+  object-fit: contain;
+  border-radius: 6px;
 }

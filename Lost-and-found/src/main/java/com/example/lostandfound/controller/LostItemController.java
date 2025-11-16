@@ -31,11 +31,6 @@ public class LostItemController {
         return lostItemRepository.findAll();
     }
 
-    // Get lost item by ID
-    @GetMapping("/{id}")
-    public Optional<Lost_items> getLostItemById(@PathVariable int id) {
-        return lostItemRepository.findById(id);
-    }
 
     // Add a lost item
     @PostMapping

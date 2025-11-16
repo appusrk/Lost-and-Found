@@ -9,10 +9,10 @@ import Swal from 'sweetalert2';
   selector: 'app-issues',
   standalone: true,
   imports: [FormsModule, CommonModule, SidebarComponent],
-  templateUrl: './issues.component.html',
-  styleUrls: ['./issues.component.css']
+  templateUrl: './issuesform.component.html',
+  styleUrls: ['./issuesform.component.css']
 })
-export class IssuesComponent {
+export class IssuesformComponent {
   constructor(private router: Router) {}
   itemname = '';
   description = '';
