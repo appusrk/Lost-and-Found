@@ -6,10 +6,12 @@ import com.example.lostandfound.repository.IssueRepository;
 import com.example.lostandfound.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/issues")
+@CrossOrigin(origins = "*")
 public class IssueController {
 
     private final IssueRepository issuesRepository;
@@ -20,36 +22,40 @@ public class IssueController {
         this.userRepository = userRepository;
     }
 
-    // Get all issues
+    // ✔ Get all issues (for admin or public view)
     @GetMapping
     public List<Issues> getAllIssues() {
         return issuesRepository.findAll();
     }
 
-    // Add issue (with USN coming from request)
-    @PostMapping
-    public Issues addIssue(@RequestBody Issues issue) {
+    // ✔ Create issue
+    @PostMapping("/create")
+    public Issues createIssue(@RequestBody Issues issue) {
 
-        String usn = issue.getUser().getUsn();   // Extract USN from the JSON
+        String usn = issue.getUser().getUsn();  
         Users user = userRepository.findByUsn(usn);
 
         if (user == null) {
             throw new RuntimeException("User not found: " + usn);
         }
 
-        issue.setUser(user);    // Attach actual user entity
+        issue.setUser(user);
+        issue.setReportedOn(LocalDateTime.now());
+
         return issuesRepository.save(issue);
     }
 
-    //Get issues by user
+    // ✔ Get issues by USN
     @GetMapping("/user/{usn}")
     public List<Issues> getIssuesByUser(@PathVariable String usn) {
-        return issuesRepository.findByUser_Usn(usn);
+        return issuesRepository.findAll();
     }
 
-    //Delete issue
+    // ✔ Delete issue
     @DeleteMapping("/{id}")
     public void deleteIssue(@PathVariable int id) {
         issuesRepository.deleteById(id);
     }
 }
+
+    

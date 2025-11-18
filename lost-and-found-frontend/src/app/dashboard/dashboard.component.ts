@@ -21,13 +21,13 @@ export class DashboardComponent {
       this.showButtons = HOME_BUTTONS.includes(current);
     });
   }  
-  /*ngOnInit(): void {
-  const isLoggedIn = localStorage.getItem('loggedInUser');
+  ngOnInit(): void {
+  const isLoggedIn = localStorage.getItem('userUSN');
   if (!isLoggedIn) {
     this.router.navigate(['/login']);
   }
 }
-*/
+
 
 
 }

@@ -56,17 +56,22 @@
 </div>
 
 
-      <!-- Image Upload -->
+<!-- Image Upload -->
 <div class="form-group">
   <label for="image">Upload Item Image (Optional)</label>
-  <input type="file" id="image" name="image"
-         (change)="onFileSelected($event)" accept="image/*" />
 
-  <!-- Image Preview -->
-  <div *ngIf="imagePreview" class="preview-box">
-    <img [src]="imagePreview" alt="Preview" class="preview-img" />
+  <input type="file"
+         id="image"
+         name="image"
+         (change)="onFileSelected($event)"
+         accept="image/*" />
+
+  <!-- Image preview -->
+  <div *ngIf="imagePreview" class="preview-container">
+    <img [src]="imagePreview" class="preview-img" />
   </div>
 </div>
+
 
 
       

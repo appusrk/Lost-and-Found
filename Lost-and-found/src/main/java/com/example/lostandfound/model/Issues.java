@@ -33,7 +33,6 @@ public class Issues {
     @Column(name = "reported_on")
     private LocalDateTime reportedOn =LocalDateTime.now(); 
     
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "USN", referencedColumnName = "USN", nullable = false)
     private Users user;

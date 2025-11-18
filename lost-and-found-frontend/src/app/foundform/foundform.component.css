@@ -15,3 +15,16 @@ app-sidebar {
   margin-top: 50px; /* offset for header */
   height: calc(100vh - 65px);
 }
+.preview-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* prevents stretching */
+  border-radius: 8px;
+  border: 2px solid #ddd;
+}

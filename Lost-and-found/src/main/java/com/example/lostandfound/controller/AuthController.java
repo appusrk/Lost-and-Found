@@ -24,14 +24,18 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<Map<String, String>> register(@RequestBody RegisterRequest registerRequest) {
 
-        // Check duplicates
-        if (userRepository.findByUsn(registerRequest.getUsn()) != null) {
-            return ResponseEntity.badRequest().body("USN already exists!");
+    	if (userRepository.findByUsn(registerRequest.getUsn()) != null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("error", "USN already exists!"));
         }
+
         if (userRepository.findByEmail(registerRequest.getEmail()) != null) {
-            return ResponseEntity.badRequest().body("Email already exists!");
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("error", "Email already exists!"));
         }
 
         Users user = new Users();
@@ -43,8 +47,8 @@ public class AuthController {
         user.setUserLevel(registerRequest.getUserLevel());
 
         userRepository.save(user);  // <- saves to DB
+        return ResponseEntity.ok(Map.of("message", "User registered successfully"));
 
-        return ResponseEntity.ok("User registered successfully");
     }
 
 

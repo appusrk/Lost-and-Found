@@ -8,7 +8,8 @@ import com.example.lostandfound.model.Issues;
 import com.example.lostandfound.model.Lost_items;
 
 	public interface IssueRepository extends JpaRepository<Issues, Integer> {
-		List<Issues> findByUser_Usn(String usn);
+		List<Issues> findAll();
+
 	}
 
 

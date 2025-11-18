@@ -19,14 +19,36 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(form: any) {
-    this.authService.login(form.value).subscribe({
+    if (form.invalid) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    const loginData = {
+      usn: this.usn,
+      password: this.password
+    };
+
+    this.authService.login(loginData).subscribe({
       next: (res) => {
-        alert("Login successful!");
-        localStorage.setItem("userUSN", res.usn);
-        this.router.navigate(['/dashboard']);
+        console.log("Login Response:", res);
+
+        if (res.status === "success") {
+          alert("Login successful! 💖");
+
+          // Save user details if needed
+          localStorage.setItem("userUSN", res.usn);
+          localStorage.setItem("userName", res.name);
+          localStorage.setItem("userLevel", res.userLevel);
+
+          this.router.navigate(['/dashboard']);
+        } else {
+          alert("Invalid login.");
+        }
       },
-      error: () => {
-        alert("❌ Wrong USN or password");
+      error: (err) => {
+        console.log("Login error:", err);
+        alert(err.error?.message || "❌ Wrong USN or password");
       }
     });
   }
