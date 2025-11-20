@@ -1,4 +1,5 @@
-<h2>Your Found Reports</h2>
+<div class="container"><div class="content area">
+  <h2>Your Found Reports</h2>
 
 <div *ngIf="foundItems.length === 0">
   <p>You have not reported any found items yet.</p>
@@ -10,7 +11,7 @@
       <th>Item</th>
       <th>Description</th>
       <th>Location</th>
-      <th>Date</th>
+      <th>email</th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +19,8 @@
       <td>{{ item.itemName }}</td>
       <td>{{ item.description }}</td>
       <td>{{ item.location }}</td>
-      <td>{{ item.dateFound | date:'mediumDate' }}</td>
+      <td>{{ item.email }}</td>
     </tr>
   </tbody>
 </table>
+</div></div>

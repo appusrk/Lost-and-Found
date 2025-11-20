@@ -1,34 +1,41 @@
-<div class="user-details-card" *ngIf="user; else noUser">
-  <h2>Welcome, {{ user.name }}</h2>
+<!-- SHOW THIS ONLY WHEN NOT EDITING -->
+<div *ngIf="!editMode">
+  <div class="user-details-card" *ngIf="user; else noUser">
+    <h2>Welcome, {{ user.name }}</h2>
 
-  <div class="detail-row">
-    <strong>USN / Employee ID:</strong>
-    <span>{{ user.usn }}</span>
+    <div class="detail-row">
+      <strong>USN / Employee ID:</strong>
+      <span>{{ user.usn }}</span>
+    </div>
+
+    <div class="detail-row">
+      <strong>Email:</strong>
+      <span>{{ user.email }}</span>
+    </div>
+
+    <div class="detail-row">
+      <strong>Department:</strong>
+      <span>{{ user.department || '-' }}</span>
+    </div>
+
+    <div class="detail-row">
+      <strong>User Level:</strong>
+      <span>{{ user.userLevel }}</span>
+    </div>
   </div>
 
-  <div class="detail-row">
-    <strong>Email:</strong>
-    <span>{{ user.email }}</span>
-  </div>
+  <ng-template #noUser>
+    <p>No user data found. Please login again.</p>
+  </ng-template>
 
-  <div class="detail-row">
-    <strong>Department:</strong>
-    <span>{{ user.department || '-' }}</span>
-  </div>
-
-  <div class="detail-row">
-    <strong>User Level:</strong>
-    <span>{{ user.userLevel }}</span>
+  <div class="actions">
+    <button class="edit-btn" (click)="openEdit()">Edit Profile</button>
+    <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 </div>
 
-<ng-template #noUser>
-  <p>No user data found. Please login again.</p>
-</ng-template>
-<div class="actions">
-  <button class="edit-btn" (click)="openEdit()">Edit Profile</button>
-  <button class="logout-btn" (click)="logout()">Logout</button>
-</div>
+
+<!-- SHOW ONLY IN EDIT MODE -->
 <div *ngIf="editMode" class="edit-form">
   <h3>Edit Profile</h3>
 

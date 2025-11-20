@@ -1,21 +1,27 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LostItemService {
 
-  private apiUrl = 'http://localhost:8080/api/lost'; // Your Spring Boot URL
+  private apiUrl = 'http://localhost:8080/api/lost';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  addLostItem(data: any): Observable<any> {
-    return this.http.post(this.apiUrl, data);
-  }
+  addLostItem(item: any, file?: File) {
+    const formData = new FormData();
+    formData.append('itemName', item.itemName);
+    formData.append('description', item.description);
+    formData.append('location', item.location);
+    formData.append('contact', item.contact);
+    formData.append('usn', item.usn);  // <-- USN from frontend
 
-  getLostItemsForUser(usn: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user/${usn}`);
+    if (file) {
+      formData.append('image', file);
+    }
+
+    return this.http.post(this.apiUrl, formData);
   }
 }

@@ -17,7 +17,7 @@ export class LostReportsComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    const data = localStorage.getItem('loggedInUser');
+    const data = localStorage.getItem('user');
     if (data) {
       const user = JSON.parse(data);
       this.usn = user.usn;

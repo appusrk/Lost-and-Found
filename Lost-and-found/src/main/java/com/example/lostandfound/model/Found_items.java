@@ -26,8 +26,8 @@ public class Found_items {
     @Column(name = "image_embedding", columnDefinition = "JSON")
     private String imageEmbedding;
 
-    @Column(name = "contact")
-    private String contact;
+    @Column(name = "email")
+    private String email;
     
     @Column(name = "image_hash")
     private String imageHash;    
@@ -62,13 +62,13 @@ public class Found_items {
 	}
 
 
-	public String getContact() {
-		return contact;
+	public String getEmail() {
+		return email;
 	}
 
 
-	public void setContact(String contact) {
-		this.contact = contact;
+	public void setEmail(String contact) {
+		this.email = contact;
 	}
 
 

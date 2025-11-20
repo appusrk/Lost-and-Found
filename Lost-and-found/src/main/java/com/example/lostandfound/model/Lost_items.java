@@ -23,8 +23,11 @@
 	    @Column(name = "image_url")
 	    private String imageUrl;
 
-	    @Column(name = "contact")
-	    private String contact;
+	    @Column(name = "email", nullable = false)
+	    private String email;
+
+	    
+
 	    
 	    @Column(name = "image_hash")
 	    private String imageHash; 
@@ -36,7 +39,10 @@
 	    @JoinColumn(name = "USN", referencedColumnName = "USN", nullable = false)
 	    private Users user;
 
-
+	    public String getEmail() { return email; }
+	    
+	    public void setEmail(String email) { this.email = email; }
+	    
 		public Users getUser() {
 			return user;
 		}
@@ -107,11 +113,4 @@
 			this.imageUrl = imageUrl;
 		}
 
-
-		public String getContact() {
-			return contact;
-		}
-
-		public void setContact(String contact) {
-			this.contact = contact;
-		}	}
+}

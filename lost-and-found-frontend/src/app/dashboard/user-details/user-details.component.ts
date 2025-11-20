@@ -1,8 +1,7 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-user-details',
@@ -11,32 +10,38 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-  constructor(private router: Router) {}
+
   editMode: boolean = false;
   user: any = {};
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
-    // Example: If you stored user in localStorage after login
-    const userData: any = localStorage.getItem('loggedInUser');
+    // Load ORIGINAL stored user
+    const userData = localStorage.getItem('user');
 
     if (userData) {
       this.user = JSON.parse(userData);
+    } else {
+      // No user = redirect to login
+      this.router.navigate(['/login']);
     }
   }
+
   logout() {
-  localStorage.clear();
-  this.router.navigate(['/login']);
-}
-openEdit() {
-  this.editMode = true;
-}
-saveChanges() {
-  localStorage.setItem('loggedInUser', JSON.stringify(this.user));
-  alert("Profile updated!");
-  this.editMode = false;
-}
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
 
+  openEdit() {
+    this.editMode = true;
+  }
 
+  saveChanges() {
+    // SAVE BACK TO THE SAME KEY YOU LOADED FROM
+    localStorage.setItem('user', JSON.stringify(this.user));
+
+    alert("Profile updated!");
+    this.editMode = false;
+  }
 }
-
-

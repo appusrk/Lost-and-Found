@@ -1,3 +1,5 @@
+<div class="container"><div class="content area">
+
 <h2>Your Lost Reports</h2>
 
 <div *ngIf="lostItems.length === 0">
@@ -10,7 +12,7 @@
       <th>Item</th>
       <th>Description</th>
       <th>Location</th>
-      <th>Date</th>
+      <th>Email</th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +20,9 @@
       <td>{{ item.itemName }}</td>
       <td>{{ item.description }}</td>
       <td>{{ item.location }}</td>
-      <td>{{ item.dateLost | date:'mediumDate' }}</td>
+      <td>{{ item.email }}</td>
     </tr>
   </tbody>
 </table>
+</div>
+</div>

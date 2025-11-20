@@ -1,39 +1,29 @@
 package com.example.lostandfound.services;
 
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class NotificationService {
 
-    private final RestTemplate restTemplate = new RestTemplate();
-    private final String flaskUrl = "http://127.0.0.1:5000/notify";
+    private final JavaMailSender mailSender;
 
-    public void sendWhatsAppNotification(String to, String message) {
+    public NotificationService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
+    // Send email
+    public void sendEmail(String to, String subject, String body) {
         try {
-            // Create headers and set Content-Type to application/json
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            // Create payload
-            Map<String, String> payload = new HashMap<>();
-            payload.put("to", to);
-            payload.put("message", message);
-
-            // Wrap payload and headers into an HttpEntity
-            HttpEntity<Map<String, String>> request = new HttpEntity<>(payload, headers);
-
-            // Send POST request
-            ResponseEntity<String> response =
-                    restTemplate.postForEntity(flaskUrl, request, String.class);
-
-            System.out.println("📩 Flask response: " + response.getBody());
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(body);
+            mailSender.send(message);
+            System.out.println("📩 Email sent to " + to);
         } catch (Exception e) {
-            System.err.println("❌ Failed to notify Flask: " + e.getMessage());
+            System.err.println("❌ Failed to send email to " + to + ": " + e.getMessage());
             e.printStackTrace();
         }
     }

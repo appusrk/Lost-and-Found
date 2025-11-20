@@ -1,9 +1,0 @@
-
-authtoken: 31sFXPSPwtRLhboLh9sfrCd3ntR_3sQnqijox5KD8WSArptsW
-
-tunnels:
-  lost_and_found:
-    proto: http
-    addr: 5000
-    config:
-    	subdomain: lostfound

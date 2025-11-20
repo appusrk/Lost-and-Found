@@ -36,10 +36,16 @@ export class LoginComponent {
         if (res.status === "success") {
           alert("Login successful! 💖");
 
-          // Save user details if needed
-          localStorage.setItem("userUSN", res.usn);
-          localStorage.setItem("userName", res.name);
-          localStorage.setItem("userLevel", res.userLevel);
+         
+  const userObj = {
+    usn: res.usn,
+    name: res.name,
+    userLevel: res.userLevel,
+    email: res.email,
+    department: res.department
+  };
+
+  localStorage.setItem("user", JSON.stringify(userObj));
 
           this.router.navigate(['/dashboard']);
         } else {
