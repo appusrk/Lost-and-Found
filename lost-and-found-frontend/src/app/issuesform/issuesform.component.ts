@@ -1,8 +1,9 @@
+import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,21 +15,18 @@ import Swal from 'sweetalert2';
 })
 export class IssuesformComponent {
   constructor(private router: Router) {}
-  itemname = '';
-  description = '';
+  showOther =false;
+  dept = '';
   location = '';
   contact = '';
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
-  allowOnlyPlusAndNumbers(event: KeyboardEvent) {
-  const char = String.fromCharCode(event.charCode);
-  // Allow digits (0-9) and '+' only if it's the first character
-  if (!(/[0-9]/.test(char) || (char === '+' && (event.target as HTMLInputElement).selectionStart === 0))) {
-    event.preventDefault();
-  }
-}
+  issueDept: string | null = null;
 
+  other: any;
+  issueLocation: any
 
+  
   onSubmit(form: any) {
     if (form.invalid) {
       alert('⚠️ Please fill all required fields correctly!');
@@ -44,6 +42,13 @@ export class IssuesformComponent {
       });
     form.reset();
     this.router.navigate(['/dashboard']);
+  }
+  onDeptChange() {
+    if(this.issueDept === 'other')
+    this.showOther = true;
+  else{
+    this.showOther = false;
+  }
   }
   onFileSelected(event: any): void {
   const file = event.target.files[0];

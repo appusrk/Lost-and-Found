@@ -1,1 +1,27 @@
-<p>match-history works!</p>
+<div class="container"><div class="content area">
+  <h2>Match History</h2>
+
+<div *ngIf="foundItems.length === 0">
+  <p>You have not reported any found items yet.</p>
+</div>
+
+<table *ngIf="foundItems.length > 0" class="report-table">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of foundItems">
+      <td>{{ item.lostItem.itemName }}</td>
+      <td>{{ item.foundItem.itemName }}</td>
+      <td>{{item.foundContact}}</td>
+      <td>{{item.lostContact}}</td>
+
+    </tr>
+  </tbody>
+</table>
+</div></div>

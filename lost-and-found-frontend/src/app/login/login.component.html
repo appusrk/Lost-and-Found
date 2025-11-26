@@ -33,12 +33,20 @@
         </div>
       </div>
 
-      <!-- Button -->
-      <button type="submit"
-              class="btn btn-success"
-              [disabled]="loginForm.invalid">
-        SIGN-IN
-      </button>
+     <div class="center-btn">
+  <button type="submit"
+          class="btn btn-success"
+          [disabled]="loginForm.invalid">
+    SIGN-IN
+  </button>
+</div>
+
+
+      <!-- Forgot Password / Sign Up -->
+      <div class="login-links" style="margin-top: 1rem; text-align: center;">
+        <a href="#" (click)="onForgotPassword($event)">Forgot Password?</a> |
+        <a href="#" (click)="onSignup($event)">Sign Up</a>
+      </div>
     </form>
   </div>
 </div>

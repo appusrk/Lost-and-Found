@@ -13,8 +13,8 @@ public class Issues {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "issue_name", nullable = false)
-    private String issueName;
+    @Column(name = "issue_dept", nullable = false)
+    private String issueDept;
 
     private String location;
 
@@ -25,15 +25,23 @@ public class Issues {
     private String reportedContact;
     
     @Column(name = "image_hash")
-    private String imageHash; 
-    
-    @Column(name = "assigned_to")
-    private String assignedTo; 
+    private String imageHash;  
     
     @Column(name = "reported_on")
     private LocalDateTime reportedOn =LocalDateTime.now(); 
     
-    @ManyToOne
+    @Column(name = "status")
+    private boolean status;
+    
+    
+    public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	@ManyToOne
     @JoinColumn(name = "USN", referencedColumnName = "USN", nullable = false)
     private Users user;
 
@@ -46,12 +54,12 @@ public class Issues {
 		this.id = id;
 	}
 
-	public String getIssueName() {
-		return issueName;
+	public String getIssueDept() {
+		return issueDept;
 	}
 
-	public void setIssueName(String issueName) {
-		this.issueName = issueName;
+	public void setIssueDept(String issueName) {
+		this.issueDept = issueName;
 	}
 
 	public String getLocation() {
@@ -84,14 +92,6 @@ public class Issues {
 
 	public void setImageHash(String imageHash) {
 		this.imageHash = imageHash;
-	}
-
-	public String getAssignedTo() {
-		return assignedTo;
-	}
-
-	public void setAssignedTo(String assignedTo) {
-		this.assignedTo = assignedTo;
 	}
 
 	public LocalDateTime getReportedOn() {

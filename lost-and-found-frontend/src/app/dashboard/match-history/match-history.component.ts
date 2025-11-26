@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-match-history',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './match-history.component.html',
   styleUrl: './match-history.component.css'
 })

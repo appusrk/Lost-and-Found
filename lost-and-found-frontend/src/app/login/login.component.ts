@@ -24,10 +24,7 @@ export class LoginComponent {
       return;
     }
 
-    const loginData = {
-      usn: this.usn,
-      password: this.password
-    };
+    const loginData = { usn: this.usn, password: this.password };
 
     this.authService.login(loginData).subscribe({
       next: (res) => {
@@ -36,16 +33,14 @@ export class LoginComponent {
         if (res.status === "success") {
           alert("Login successful! 💖");
 
-         
-  const userObj = {
-    usn: res.usn,
-    name: res.name,
-    userLevel: res.userLevel,
-    email: res.email,
-    department: res.department
-  };
-
-  localStorage.setItem("user", JSON.stringify(userObj));
+          const userObj = {
+            usn: res.usn,
+            name: res.name,
+            userLevel: res.userLevel,
+            email: res.email,
+            department: res.department
+          };
+          localStorage.setItem("user", JSON.stringify(userObj));
 
           this.router.navigate(['/dashboard']);
         } else {
@@ -57,5 +52,18 @@ export class LoginComponent {
         alert(err.error?.message || "❌ Wrong USN or password");
       }
     });
+  }
+
+  // Placeholder functions for links
+  onForgotPassword(event: Event) {
+    event.preventDefault();
+    console.log("Forgot Password clicked");
+    // Later: navigate to forgot password page or open popup
+  }
+
+  onSignup(event: Event) {
+    event.preventDefault();
+    console.log("Sign Up clicked");
+    // Later: navigate to signup page
   }
 }

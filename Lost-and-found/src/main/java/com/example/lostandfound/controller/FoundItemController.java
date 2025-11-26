@@ -4,6 +4,8 @@ import com.example.lostandfound.model.Found_items;
 import com.example.lostandfound.model.Users;
 import com.example.lostandfound.repository.FoundItemRepository;
 import com.example.lostandfound.repository.UserRepository;
+import com.example.lostandfound.services.MatchingServices;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,7 @@ public class FoundItemController {
     private UserRepository userRepository;
 
     private final Path uploadDir = Paths.get("uploads");
+    
 
     @PostMapping
     public ResponseEntity<?> addFoundItem(
@@ -80,6 +83,7 @@ public class FoundItemController {
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Found item added successfully");
             response.put("foundItem", foundItem);
+          
             return ResponseEntity.ok(response);
 
         } catch (IOException | NoSuchAlgorithmException e) {

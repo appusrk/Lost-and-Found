@@ -1,0 +1,25 @@
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.forgot-btn {
+  background: none;
+  border: none;
+  color: #007bff; /* blue */
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.forgot-btn:hover {
+  color: #0056b3;
+}
+.center-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}

@@ -10,8 +10,11 @@ app-sidebar {
   justify-content: center;
   align-items: center;
 }
-.container {
+.layout-container {
   display: flex;
   margin-top: 50px; /* offset for header */
   height: calc(100vh - 65px);
+}
+select option[value=""] {
+  color: #888;
 }

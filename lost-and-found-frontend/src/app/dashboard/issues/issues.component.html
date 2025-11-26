@@ -1,34 +1,26 @@
-<div class="container">
+<div class="container"><div class="content area">
+  <h2>Your Issues</h2>
 
-  
-  <hr>
-
-  <h2 class="title">All Issues</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>File</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let issue of issues">
-        <td>{{ issue.id }}</td>
-        <td>{{ issue.title }}</td>
-        <td>{{ issue.description }}</td>
-        <td>
-          <a *ngIf="issue.fileUrl" [href]="issue.fileUrl" target="_blank">Download</a>
-        </td>
-        <td>
-          <button (click)="deleteIssue(issue.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
+<div *ngIf="foundItems.length === 0">
+  <p>You have not reported any issues yet.</p>
 </div>
+
+<table *ngIf="foundItems.length > 0" class="report-table">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of foundItems">
+      <td>{{ item.itemName }}</td>
+      <td>{{ item.description }}</td>
+      <td>{{ item.location }}</td>
+      <td>{{ item.email }}</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>

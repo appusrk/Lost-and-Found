@@ -50,7 +50,8 @@ public class IssueController {
     public List<Issues> getIssuesByUser(@PathVariable String usn) {
         return issuesRepository.findAll();
     }
-
+    
+  
     // ✔ Delete issue
     @DeleteMapping("/{id}")
     public void deleteIssue(@PathVariable int id) {

@@ -31,11 +31,13 @@
       </div>
 
 
-    <div class="form-group phone-group">
-  <label for="email">Email:</label>
-<input id="email" name="email" type="email" [(ngModel)]="email" required />
-
-  </div>
+    <div class="form-group">
+        <input type="text" placeholder="Email*" name="email"
+               [(ngModel)]="email" required #emailRef="ngModel" />
+        <div *ngIf="emailRef.invalid && emailRef.touched" class="text-danger">
+          <small>Please enter your email</small>
+        </div>
+      </div>
 
       <!-- Image Upload -->
 <div class="form-group">
