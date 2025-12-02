@@ -72,3 +72,34 @@ body::before {
 .register-btn:hover {
   background: #e6c200;
 }
+.mat-mdc-snack-bar-container {
+  position: fixed !important;
+  bottom: 55px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 999999 !important;
+}
+/* SUCCESS SNACKBAR */
+.success-snackbar .mdc-snackbar__surface {
+  background-color: #4CAF50 !important;  /* Green */
+  color: white !important;
+}
+
+/* ERROR SNACKBAR */
+.error-snackbar .mdc-snackbar__surface {
+  background-color: #F44336 !important;  /* Red */
+  color: white !important;
+}
+
+/* INFO SNACKBAR (optional) */
+.info-snackbar .mdc-snackbar__surface {
+  background-color: #424242 !important;  /* Dark grey */
+  color: white !important;
+}
+
+/* Make sure text + close button are white */
+.mdc-snackbar__label,
+.mdc-snackbar__action {
+  color: white !important;
+}
+

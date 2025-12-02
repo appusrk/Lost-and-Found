@@ -10,10 +10,8 @@
 
       <!-- Name -->
      <div class="form-group">
-  <select name="issuedept" [(ngModel)]="issueDept" required #issueDeptRef="ngModel" (change)="onDeptChange()">
-     <option value="" [selected]="issueDept === null" hidden>
       Choose Issue Department*
-    </option>
+  <select name="issuedept" [(ngModel)]="issueDept" required #issueDeptRef="ngModel" (change)="onDeptChange()">
     <option value="gym">Gym</option>
     <option value="security">Security</option>
     <option value="cleaning">Cleaning</option>

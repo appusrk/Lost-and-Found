@@ -4,7 +4,7 @@ import com.example.lostandfound.model.Users;
 import com.example.lostandfound.repository.UserRepository;
 import com.example.lostandfound.dto.RegisterRequest;
 import com.example.lostandfound.dto.LoginRequest;
-
+import com.example.lostandfound.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Random;
+
+
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200"})
@@ -22,6 +26,12 @@ public class AuthController {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private  NotificationService notificationService;
+
+ // inside AuthController
+    private Map<String, String> otpStorage = new ConcurrentHashMap<>();
+    private Random random = new Random();
 
     @PostMapping("/register")
     public ResponseEntity<Map<String, String>> register(@RequestBody RegisterRequest registerRequest) {
@@ -50,6 +60,7 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("message", "User registered successfully"));
 
     }
+    
 
 
     // ===================== LOGIN =====================
@@ -78,4 +89,64 @@ public class AuthController {
                 "userLevel", dbUser.getUserLevel()
         ));
     }
+    //Sending OTP 
+    @PostMapping("/send-otp")
+    public ResponseEntity<Map<String, String>> sendOtp(@RequestBody Map<String, String> request) {
+        String emailOrUsn = request.get("emailOrUsn");
+        String email;
+        Users user = userRepository.findByUsn(emailOrUsn);
+        if (user == null) {
+            user = userRepository.findByEmail(emailOrUsn);
+        }
+
+        if (user == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "User not found"));
+        }
+        if(request.get("emailOrUsn").indexOf('@')!=-1)
+        	email= request.get("emailOrUsn");
+        else
+        	email= user.getEmail();
+
+        // Generate 6-digit OTP
+        String otp = String.format("%06d", random.nextInt(999999));
+        otpStorage.put(emailOrUsn, otp);
+
+        // TODO: Send OTP via email (you can log for now)
+        System.out.println("OTP for " + emailOrUsn + ": " + otp);
+        
+        notificationService.sendEmail(email,"OTP for resetting password", otp);
+        return ResponseEntity.ok(Map.of("status", "success", "message", "OTP sent"));
+    }
+    
+    //Reset Password
+    @PostMapping("/reset-password")
+    public ResponseEntity<Map<String, String>> resetPassword(@RequestBody Map<String, String> request) {
+        String emailOrUsn = request.get("emailOrUsn");
+        String otp = request.get("otp");
+        String newPassword = request.get("newPassword");
+
+        Users user = userRepository.findByUsn(emailOrUsn);
+        if (user == null) {
+            user = userRepository.findByEmail(emailOrUsn);
+        }
+
+        if (user == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "User not found"));
+        }
+
+        String savedOtp = otpStorage.get(emailOrUsn);
+        if (savedOtp == null || !savedOtp.equals(otp)) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Invalid or expired OTP"));
+        }
+
+        // Update password
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+        // Remove OTP after successful reset
+        otpStorage.remove(emailOrUsn);
+
+        return ResponseEntity.ok(Map.of("status", "success", "message", "Password reset successful"));
+    }
+
 }

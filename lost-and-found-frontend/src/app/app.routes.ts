@@ -7,6 +7,7 @@ import { FoundComponent } from './foundform/foundform.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IssuesformComponent } from './issuesform/issuesform.component';
 import { IssuesComponent } from './dashboard/issues/issues.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -14,6 +15,8 @@ export const routes: Routes = [
   { path: 'signup', component: RegisterComponent },
   { path: 'lostform', component: LostComponent },
   { path: 'findform', component: FoundComponent },
+  { path: 'forgotpassword',  component: ForgotPasswordComponent },
+
   {
   path: 'dashboard',
   component: DashboardComponent,

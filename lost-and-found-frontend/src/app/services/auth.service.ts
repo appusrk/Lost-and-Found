@@ -19,5 +19,13 @@ export class AuthService {
   // FIXED REGISTER (NO JSON.stringify)
   register(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, data);
-  }
+  
+}
+sendOtp(data: { emailOrUsn: string }) {
+  return this.http.post(`${this.baseUrl}/send-otp`, data);
+}
+
+verifyOtpAndResetPassword(data: { emailOrUsn: string, otp: string, newPassword: string }) {
+  return this.http.post(`${this.baseUrl}/reset-password`, data);
+}
 }
